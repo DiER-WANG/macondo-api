@@ -10,6 +10,6 @@ app.use('/resource', express.static('resource'));
 // app.use('/birds', birds);
 app.use('/api/v1/music', music);
 
-app.listen(8080, function () {
+app.listen(80, function () {
 	console.log('Macondo\'s backend is starting');
 });
