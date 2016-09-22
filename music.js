@@ -3,7 +3,6 @@ var router = express.Router();
 var api = require('NeteaseCloudMusicApi').api;
 
 // 获取全部音乐
-
 router.use('/', function (req, res, next) {
 	console.log('--------');
 	console.log(Date.now());	
