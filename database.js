@@ -47,3 +47,17 @@ exports.insertAccount = function (doc, callback) {
 		callback(result);
 	});
 }
+
+// 判断密码是否正确
+exports.checkPassword = function (loginer, callback) {
+	findAccount(loginer, function (documents) {
+		if (documents.password == loginer.password) {
+			callback(true, documents);
+		} else {
+			callback(false, null);
+		}
+	});
+}
+
+
+
