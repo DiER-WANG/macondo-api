@@ -12,7 +12,6 @@ var connect = function (databaseName, callback) {
 
 var findOne = function (databaseName, collectionName, target, callback) {
 	connect(databaseName, function (err, database) {		
-
 		if (err) {
 			callback(err, null);
 		} else {

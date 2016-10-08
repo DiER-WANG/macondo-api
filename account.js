@@ -17,7 +17,6 @@ router.post('/register', function (req, res) {
 		// 先判断账号是否存在；在 数据库 中查找相关信息
 		// 如果存在，返回注册失败
 		// 如果不存在，返回注册成功	
-
 		var bodyJSON = JSON.parse(body);// 将字符串 转变 为 json
 		console.log('bodyJSON: ' + bodyJSON);
 		db.findAccount({'account': 'aaa'}, function (err, documents) {
@@ -27,7 +26,6 @@ router.post('/register', function (req, res) {
 					'result': null					
 				});
 			} else {				
-
 				if (documents.length == 0) {			
 					console.log('222' + documents);
 					db.insertAccount(bodyJSON, function (err, result) {										
