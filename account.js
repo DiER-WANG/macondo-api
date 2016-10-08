@@ -66,7 +66,6 @@ router.get('/login/:account-:password', function (req, res) {
 	console.log('登录');
 	db.findAccount(req.params, function (err, documents) {		
 		if (err) {
-			console.log('ssss' + err);
 			res.send({
 				'error': '服务器查找账户时发生错误',
 				'result': null
