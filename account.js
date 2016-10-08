@@ -16,8 +16,8 @@ router.post('/register', function (req, res) {
 	req.on('end', function () {
 		// 先判断账号是否存在；在 数据库 中查找相关信息
 		// 如果存在，返回注册失败
-		// 如果不存在，返回注册成功
-		
+		// 如果不存在，返回注册成功	
+
 		var bodyJSON = JSON.parse(body);// 将字符串 转变 为 json
 		console.log('bodyJSON: ' + bodyJSON);
 		db.findAccount({'account': 'aaa'}, function (err, documents) {
@@ -64,8 +64,9 @@ router.get('/login/:account-:password', function (req, res) {
 	// 账号存在，判断密码是否正确
 	// 密码正确，登陆成功；密码错误，登录失败
 	console.log('登录');
-	db.findAccount(req.params, function (err, documents) {
+	db.findAccount(req.params, function (err, documents) {		
 		if (err) {
+			console.log('ssss' + err);
 			res.send({
 				'error': '服务器查找账户时发生错误',
 				'result': null
