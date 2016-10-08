@@ -2,12 +2,14 @@ var express = require('express');
 var router = express.Router();
 var db = require('./database');
 
+
 router.use('/', function (req, res, next) {
 	console.log('account manage');
 	next();
 })
 // 注册账号
 router.post('/register', function (req, res) {
+
 	var body = '';
 	req.on('data', function (dataChunk) {
 		body += dataChunk;
@@ -17,8 +19,8 @@ router.post('/register', function (req, res) {
 		// 先判断账号是否存在；在 数据库 中查找相关信息
 		// 如果存在，返回注册失败
 		// 如果不存在，返回注册成功	
-		var bodyJSON = JSON.parse(body);// 将字符串 转变 为 json
-		console.log('bodyJSON: ' + bodyJSON);
+		//var bodyString = JSON.stringify(body);// 将字符串 转变 为 json
+		var bodyJSON = JSON.parse(body);
 		db.findAccount({'account': 'aaa'}, function (err, documents) {
 			if (err) {
 				res.send({
