@@ -1,16 +1,13 @@
 var express = require('express');
 var router = express.Router();
 var db = require('./database');
-var multer = require('multer');
-
-var upload = multer();
 
 router.use('/', function (req, res, next) {
 	console.log('account manage');
 	next();
 })
 // 注册账号
-router.post('/register', upload.array(), function (req, res) {	
+router.post('/register', function (req, res) {	
 	console.log('111 ' + JSON.stringify(req.body));
 	db.findAccount(req.body, function (err, documents) {
 	if (err) {
@@ -27,7 +24,6 @@ router.post('/register', upload.array(), function (req, res) {
 						'result': null
 					});
 				} else {	
-					console.log('注册成功');
 					res.send({
 						'error': null,
 						'result': result
