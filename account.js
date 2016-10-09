@@ -15,7 +15,7 @@ router.post('/register', upload.array(), function (req, res) {
 	db.findAccount(req.body, function (err, documents) {
 	if (err) {
 		res.send({
-			'error': '服务器查找账号时发生错误',
+			'error': err,
 			'result': null					
 		});
 	} else {				
@@ -24,7 +24,7 @@ router.post('/register', upload.array(), function (req, res) {
 			db.insertAccount(req.body, function (err, result) {										
 				if (err) {
 					res.send({
-						'error': '注册账号时发生错误',
+						'error': err,
 						'result': null
 					});
 				} else {	
@@ -38,7 +38,7 @@ router.post('/register', upload.array(), function (req, res) {
 		} else {				
 			// 账号名已存在，请换一个帐号名重新注册
 			res.send({
-				'error': '账号名已存在，请换一个帐号名重新注册',
+				'error': err,
 				'result': null
 			});
 		}		
@@ -56,7 +56,7 @@ router.get('/login/:account-:password', function (req, res) {
 	db.findAccount(req.params, function (err, documents) {
 		if (err) {
 			res.send({
-				'error': '服务器查找账户时发生错误',
+				'error': err,
 				'result': null
 			});
 		} else {
