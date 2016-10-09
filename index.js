@@ -3,7 +3,7 @@ var app = express();
 var music = require('./music');
 var account = require('./account');
 var bodyParser = require('body-parser');
-var uploader = require('multer');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));

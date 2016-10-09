@@ -19,7 +19,6 @@ router.post('/register', upload.array(), function (req, res) {
 			'result': null					
 		});
 	} else {				
-
 		if (documents.length == 0) {			
 			db.insertAccount(req.body, function (err, result) {										
 				if (err) {
@@ -36,9 +35,8 @@ router.post('/register', upload.array(), function (req, res) {
 				}
 			});
 		} else {				
-			// 账号名已存在，请换一个帐号名重新注册
 			res.send({
-				'error': err,
+				'error': '账号名已存在，请换一个帐号名重新注册',
 				'result': null
 			});
 		}		
