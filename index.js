@@ -12,6 +12,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/resource', express.static('resource'));
 app.use('/api/music', music);
 app.use('/api/account', account);
-app.listen(80, function () {
+app.listen(8080, function () {
 	console.log('Macondo\'s backend is starting');
 });
