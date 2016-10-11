@@ -2,16 +2,20 @@ var mongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 
 var connect = function (databaseName, callback) {
-	var url = 'mongodb://localhost:27017/' + databaseName;	
+	var url = 'mongodb://localhost:27017/' + databaseName;
 	console.log(url);
-	mongoClient.connect(url, function (err, database) {		
-		console.log('Successfully connected to MongoDB instance');
+	mongoClient.connect(url, function (err, database) {
+		if (err) {
+			console.log('Fail to connect MongoDB instance');
+		} else {
+			console.log('Success to connect MongoDB instance');
+		}
 		callback(err, database);
 	});
 }
 
 var findOne = function (databaseName, collectionName, target, callback) {
-	connect(databaseName, function (err, database) {		
+	connect(databaseName, function (err, database) {
 		if (err) {
 			callback(err, null);
 		} else {
@@ -19,13 +23,13 @@ var findOne = function (databaseName, collectionName, target, callback) {
 			collection.find(target).toArray(function (err, documents) {
 				callback(err, documents);
 				database.close();
-			});			
+			});
 		}
 	});
 }
 
 var insertOne = function (databaseName, collectionName, doc, callback) {
-	connect(databaseName, function (err, database) {		
+	connect(databaseName, function (err, database) {
 		if (err) {
 			callback(err, null)
 		} else {
@@ -39,7 +43,7 @@ var insertOne = function (databaseName, collectionName, doc, callback) {
 }
 
 // 查找帐号
-exports.findAccount = function (register, callback) {	
+exports.findAccount = function (register, callback) {
 	findOne('macondo', 'account', {'account': register.account}, function (err, documents) {
 		callback(err, documents);
 	});
@@ -52,6 +56,3 @@ exports.insertAccount = function (doc, callback) {
 		callback(err, result);
 	});
 }
-
-
-
