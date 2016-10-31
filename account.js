@@ -10,34 +10,34 @@ router.use('/', function (req, res, next) {
 router.post('/register', function (req, res) {	
 	console.log('111 ' + JSON.stringify(req.body));
 	db.findAccount(req.body, function (err, documents) {
-	if (err) {
-		res.send({
-			'error': err,
-			'result': null					
-		});
-	} else {				
-		if (documents.length == 0) {			
-			db.insertAccount(req.body, function (err, result) {										
-				if (err) {
-					res.send({
-						'error': err,
-						'result': null
-					});
-				} else {	
-					res.send({
-						'error': null,
-						'result': result
-					});
-				}
+		if (err) {
+			res.send({
+				'error': err,
+				'result': null					
 			});
 		} else {				
-			res.send({
-				'error': '账号名已存在，请换一个帐号名重新注册',
-				'result': null
-			});
-		}		
-	}
-});
+			if (documents.length == 0) {			
+				db.insertAccount(req.body, function (err, result) {										
+					if (err) {
+						res.send({
+							'error': err,
+							'result': null
+						});
+					} else {	
+						res.send({
+							'error': null,
+							'result': result
+						});
+					}
+				});
+			} else {				
+				res.send({
+					'error': '账号名已存在，请换一个帐号名重新注册',
+					'result': null
+				});
+			}		
+		}
+	});
 });
 
 // 登录
@@ -84,5 +84,7 @@ router.get('/login/:account-:password', function (req, res) {
 		}
 	});
 });
+
+// 获取用户信息
 
 module.exports = router;
