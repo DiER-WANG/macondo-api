@@ -8,8 +8,8 @@ router.use('/', function (req, res, next) {
 })
 // 注册账号
 router.post('/register', function (req, res) {	
-	console.log('111 ' + JSON.stringify(req.body));
-	db.findAccount(req.body, function (err, documents) {
+	console.log('111 ' + JSON.stringify(req.body.account));
+	db.findAccount(req.body.account, function (err, documents) {
 		if (err) {
 			res.send({
 				'error': err,
@@ -46,8 +46,8 @@ router.get('/login/:account-:password', function (req, res) {
 	// 账号不存在，提示登录失败
 	// 账号存在，判断密码是否正确
 	// 密码正确，登陆成功；密码错误，登录失败
-	console.log('登录');
-	db.findAccount(req.params, function (err, documents) {
+	console.log('登录' + JSON.stringify(req.params));
+	db.findAccount(req.params.account, function (err, documents) {
 		if (err) {
 			res.send({
 				'error': err,
@@ -86,5 +86,13 @@ router.get('/login/:account-:password', function (req, res) {
 });
 
 // 获取用户信息
+router.get('/:account', function (req, res) {
+	db.findAccount(req.params.account, function (err, documents) {
+		res.send({
+			'error': err,
+			'result': documents	
+		});
+	});
+});
 
 module.exports = router;

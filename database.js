@@ -15,7 +15,7 @@ var connect = function (databaseName, callback) {
 }
 
 var findOne = function (databaseName, collectionName, target, callback) {
-	connect(databaseName, function (err, database) {
+	connect(databaseName, function (err, database) {				
 		if (err) {
 			callback(err, null);
 		} else {
@@ -43,8 +43,8 @@ var insertOne = function (databaseName, collectionName, doc, callback) {
 }
 
 // 查找帐号
-exports.findAccount = function (register, callback) {
-	findOne('macondo', 'account', {'account': register.account}, function (err, documents) {
+exports.findAccount = function (account, callback) {
+	findOne('macondo', 'account', {'account': account}, function (err, documents) {
 		callback(err, documents);
 	});
 }
